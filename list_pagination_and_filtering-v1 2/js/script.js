@@ -20,7 +20,7 @@ const studentList = document.querySelectorAll("li")
 //const studentList_QuerySelectorAll = document.querySelectorAll("li")
 //const studentList_QuerySelector = document.querySelector("li")
 //const studentList_TagName = document.getElementsByTagName("li")
-const showItems = 10
+const pages = 2
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -40,12 +40,23 @@ const showItems = 10
 // page is the number that you’ll pass in as an argument later when function is called
 // list parameter represents the actual list of students that you’ll pass in as an argument later when function is called
 function showPage(list, page) {
-  for (let i = 0; i < page; i++) {
-    list = studentList[i]
-    console.log(list)
+  let itemsPerPage = 10
+  let startIndex = page * itemsPerPage - itemsPerPage
+  let endIndex = page * itemsPerPage
+  console.log(startIndex)
+  console.log(endIndex)
+
+  for (let i = 0; i < list.length; i++) {
+    list[i].style.display = "none"
+    //console.log(list[i])
+
+    if (i < startIndex && i < endIndex) {
+      list[i].style.display = ""
+    }
   }
 }
-showPage(10, showItems)
+
+showPage(studentList, pages)
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
