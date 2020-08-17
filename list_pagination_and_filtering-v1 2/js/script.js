@@ -20,7 +20,7 @@ const studentList = document.querySelectorAll("li")
 //const studentList_QuerySelectorAll = document.querySelectorAll("li")
 //const studentList_QuerySelector = document.querySelector("li")
 //const studentList_TagName = document.getElementsByTagName("li")
-const pages = 2
+const pages = [1, 2, 3, 4, 5]
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -62,7 +62,7 @@ function showPage(list, page) {
   }
 }
 
-showPage(studentList, pages)
+showPage(studentList, pages[1])
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
@@ -71,8 +71,6 @@ showPage(studentList, pages)
 
 function appendPageLinks(links) {
   const pageDiv = document.getElementsByClassName("page")[0]
-  //const pageDiv = document.getElementsByTagName("div")[0]
-  //console.log(pageDiv.tagName)
   const pDiv = document.createElement("div")
   const ul = document.createElement("ul")
   const li = document.createElement("li")
