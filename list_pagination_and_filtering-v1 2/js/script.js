@@ -65,6 +65,8 @@ showPage(studentList, pages)
 
 function appendPageLinks(links) {
   const pageDiv = document.getElementsByClassName("page")[0]
+  //const pageDiv = document.getElementsByTagName("div")[0]
+  console.log(pageDiv.tagName)
   const pDiv = document.createElement("div")
   const ul = document.createElement("ul")
   const li = document.createElement("li")
