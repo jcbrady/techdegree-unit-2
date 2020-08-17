@@ -46,12 +46,18 @@ function showPage(list, page) {
   console.log(startIndex)
   console.log(endIndex)
 
+  // delete
+  let count = 1
+
   for (let i = 0; i < list.length; i++) {
     list[i].style.display = "none"
-    //console.log(list[i])
+    console.log("for loop (hide list item) : " + count++)
+    console.log(list[i])
 
-    if (i < startIndex && i < endIndex) {
+    if (i >= startIndex && i < endIndex) {
       list[i].style.display = ""
+      console.log("if (SHOW) : " + count++)
+      console.log(list[i])
     }
   }
 }
@@ -66,7 +72,7 @@ showPage(studentList, pages)
 function appendPageLinks(links) {
   const pageDiv = document.getElementsByClassName("page")[0]
   //const pageDiv = document.getElementsByTagName("div")[0]
-  console.log(pageDiv.tagName)
+  //console.log(pageDiv.tagName)
   const pDiv = document.createElement("div")
   const ul = document.createElement("ul")
   const li = document.createElement("li")
@@ -78,6 +84,7 @@ function appendPageLinks(links) {
   ul.appendChild(li)
   a.href = "#"
   li.appendChild(a)
+  //.textContent = "test"
 
   console.log(pDiv)
 
