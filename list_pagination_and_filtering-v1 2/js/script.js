@@ -63,4 +63,42 @@ showPage(studentList, pages)
    functionality to the pagination buttons.
 ***/
 
+function appendPageLinks(links) {
+  const pageDiv = document.getElementsByClassName("page")[0]
+  const pDiv = document.createElement("div")
+  const ul = document.createElement("ul")
+  const li = document.createElement("li")
+  const a = document.createElement("a")
+
+  console.log(pDiv)
+
+  pDiv.className = "pagination"
+  //ul.className = "pageNumbers"
+  pageDiv.appendChild(pDiv)
+  pDiv.appendChild(ul)
+  ul.appendChild(li)
+  a.href = "#"
+  li.appendChild(a)
+
+  // can't use (below) yet since the element doesn't yet exist in the DOM
+  //ul.firstElementChild.a.className = "active"
+}
+
+appendPageLinks()
+
+// let ul = document.getElementsByClassName("pageNumbers")[0]
+// ul.firstElementChild.className = "active"
+
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
+
+/* <div class="pagination">
+<ul>
+<li>
+  <a class="active" href="#">1</a>
+</li>
+ <li>
+  <a href="#">2</a>
+</li>
+ <li>
+  <a href="#">3</a>
+</li> */
