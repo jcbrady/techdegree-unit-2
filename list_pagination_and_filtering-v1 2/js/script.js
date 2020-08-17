@@ -70,18 +70,17 @@ function appendPageLinks(links) {
   const li = document.createElement("li")
   const a = document.createElement("a")
 
-  console.log(pDiv)
-
   pDiv.className = "pagination"
-  //ul.className = "pageNumbers"
   pageDiv.appendChild(pDiv)
   pDiv.appendChild(ul)
   ul.appendChild(li)
   a.href = "#"
   li.appendChild(a)
 
-  // can't use (below) yet since the element doesn't yet exist in the DOM
-  //ul.firstElementChild.a.className = "active"
+  console.log(pDiv)
+
+  // can't use (below) yet since the element currently doesn't exist in the DOM
+  // ul.firstElementChild.a.className = "active"
 }
 
 appendPageLinks()
