@@ -20,7 +20,9 @@ const studentList = document.querySelectorAll("li")
 //const studentList_QuerySelectorAll = document.querySelectorAll("li")
 //const studentList_QuerySelector = document.querySelector("li")
 //const studentList_TagName = document.getElementsByTagName("li")
-const pages = [1, 2, 3, 4, 5]
+
+//results per page
+const page = 10
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -39,7 +41,7 @@ const pages = [1, 2, 3, 4, 5]
 
 // page is the number that you’ll pass in as an argument later when function is called
 // list parameter represents the actual list of students that you’ll pass in as an argument later when function is called
-function showPage(list, page) {
+const showPage = (list, page) => {
   let itemsPerPage = 10
   let startIndex = page * itemsPerPage - itemsPerPage
   let endIndex = page * itemsPerPage
@@ -62,7 +64,7 @@ function showPage(list, page) {
   }
 }
 
-showPage(studentList, pages[1])
+showPage(studentList, page)
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
@@ -71,19 +73,24 @@ showPage(studentList, pages[1])
 
 function appendPageLinks(links) {
   const pageDiv = document.getElementsByClassName("page")[0]
+  // create elements
   const pDiv = document.createElement("div")
   const ul = document.createElement("ul")
   const li = document.createElement("li")
   const a = document.createElement("a")
-
+  // structure elements
   pDiv.className = "pagination"
   pageDiv.appendChild(pDiv)
   pDiv.appendChild(ul)
   ul.appendChild(li)
+  a.className = "active"
   a.href = "#"
   li.appendChild(a)
-  //.textContent = "test"
-
+  a.textContent = "test"
+  a.addEventListener("click", e => {
+    e.target = a
+    console.log("clicked")
+  })
   console.log(pDiv)
 
   // can't use (below) yet since the element currently doesn't exist in the DOM
