@@ -22,7 +22,7 @@ const studentList = document.querySelectorAll("li")
 //const studentList_TagName = document.getElementsByTagName("li")
 
 //results per page
-const page = 10
+const numberPerPage = 10
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -42,9 +42,8 @@ const page = 10
 // page is the number that you’ll pass in as an argument later when function is called
 // list parameter represents the actual list of students that you’ll pass in as an argument later when function is called
 const showPage = (list, page) => {
-  let itemsPerPage = 10
-  let startIndex = page * itemsPerPage - itemsPerPage
-  let endIndex = page * itemsPerPage
+  let startIndex = page * numberPerPage - numberPerPage
+  let endIndex = page * numberPerPage
   console.log(startIndex)
   console.log(endIndex)
 
@@ -64,40 +63,53 @@ const showPage = (list, page) => {
   }
 }
 
-showPage(studentList, page)
+showPage(studentList, 1)
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
 
-function appendPageLinks(links) {
+function appendPageLinks(list) {
+  const pageTotal = list.length / numberPerPage
+  let pageCounter = ""
   const pageDiv = document.getElementsByClassName("page")[0]
+  console.log(list)
+  console.log(pageTotal)
   // create elements
   const pDiv = document.createElement("div")
   const ul = document.createElement("ul")
   const li = document.createElement("li")
   const a = document.createElement("a")
-  // structure elements
+
+  // structure and add elements to DOM
   pDiv.className = "pagination"
   pageDiv.appendChild(pDiv)
   pDiv.appendChild(ul)
-  ul.appendChild(li)
-  a.className = "active"
-  a.href = "#"
-  li.appendChild(a)
-  a.textContent = "test"
+  let addLi = ul.appendChild(li)
+  //console.log(addLi)
+  for (i = 1; i <= pageTotal; i++) {
+    addLi += ul.appendChild(li)
+    a.href = "#"
+    a.textContent = pageCounter += [i]
+    //a.className = "active"
+
+    li.appendChild(a)
+  }
+
   a.addEventListener("click", e => {
     e.target = a
+    a.className = "active"
     console.log("clicked")
   })
+
   console.log(pDiv)
 
   // can't use (below) yet since the element currently doesn't exist in the DOM
   // ul.firstElementChild.a.className = "active"
 }
 
-appendPageLinks()
+appendPageLinks(studentList)
 
 // let ul = document.getElementsByClassName("pageNumbers")[0]
 // ul.firstElementChild.className = "active"
