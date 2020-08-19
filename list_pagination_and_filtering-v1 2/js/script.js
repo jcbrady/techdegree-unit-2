@@ -62,9 +62,7 @@ const showPage = (list, page) => {
     }
   }
 }
-
 showPage(studentList, 1)
-
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
@@ -72,36 +70,46 @@ showPage(studentList, 1)
 
 function appendPageLinks(list) {
   const pageTotal = list.length / numberPerPage
-  let pageCounter = ""
+  let pageCounter = "1"
   const pageDiv = document.getElementsByClassName("page")[0]
+
   console.log(list)
   console.log(pageTotal)
+
   // create elements
   const pDiv = document.createElement("div")
   const ul = document.createElement("ul")
-  const li = document.createElement("li")
-  const a = document.createElement("a")
+  //const li = document.createElement("li")
+  //const a = document.createElement("a")
 
   // structure and add elements to DOM
   pDiv.className = "pagination"
   pageDiv.appendChild(pDiv)
   pDiv.appendChild(ul)
-  let addLi = ul.appendChild(li)
-  //console.log(addLi)
+
   for (i = 1; i <= pageTotal; i++) {
-    addLi += ul.appendChild(li)
+    const li = document.createElement("li")
+    const a = document.createElement("a")
+
     a.href = "#"
-    a.textContent = pageCounter += [i]
-    //a.className = "active"
-
+    a.textContent = pageCounter++
+    a.className = ""
+    ul.appendChild(li)
     li.appendChild(a)
-  }
 
-  a.addEventListener("click", e => {
-    e.target = a
-    a.className = "active"
-    console.log("clicked")
-  })
+    a.addEventListener("click", e => {
+      e.target = a
+      if ((a.className = "active")) {
+        a.className = ""
+      } else {
+        a.className = "active"
+      }
+      console.log("clicked")
+      // call function - what should page argement be?
+      console.log(pageCounter)
+      showPage(studentList, a.textContent)
+    })
+  }
 
   console.log(pDiv)
 
