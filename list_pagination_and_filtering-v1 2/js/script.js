@@ -95,20 +95,20 @@ function appendPageLinks(list) {
   pageDiv.appendChild(pDiv)
   pDiv.appendChild(ul)
 
-  // loop through the list show only the display results
+  // loop through the list filter and show only the display results
   for (i = 0; i < list.length; i++) {
     if (list[i].style.display == "") {
-      tList = list[i]
+      theList = list[i]
     }
   }
   // loop through the pageTotal variable to create an li link for each page
   for (i = 1; i <= pageTotal; i++) {
     const li = document.createElement("li")
-    const a = document.createElement("a")
+    let a = document.createElement("a")
     //let func = showPage(studentList, [i])
     //console.log(func)
 
-    a.href = showPage(tList, [i]) // link must be to call this function??? showPage(studentList, [i])
+    //a.href = "#" // link must be to call this function??? showPage(studentList, [i])
     a.textContent = pageCounter++
     a.className = ""
     ul.appendChild(li)
@@ -116,6 +116,10 @@ function appendPageLinks(list) {
 
     a.addEventListener("click", e => {
       e.target = a
+      //e.preventDefault()
+      //a.href =
+      console.log(showPage(theList, [i]))
+
       if ((a.className = "active")) {
         a.className = ""
       } else {
@@ -129,9 +133,6 @@ function appendPageLinks(list) {
   }
 
   console.log(pDiv)
-
-  // can't use (below) yet since the element currently doesn't exist in the DOM
-  // ul.firstElementChild.a.className = "active"
 }
 
 appendPageLinks(showPage(studentList, 1))
