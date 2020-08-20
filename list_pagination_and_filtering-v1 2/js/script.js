@@ -44,37 +44,46 @@ const numberPerPage = 10
 const showPage = (list, page) => {
   let startIndex = page * numberPerPage - numberPerPage
   let endIndex = page * numberPerPage
+  let ul = document.getElementsByClassName("student-list")[0]
+  console.log("Start and end Index:")
   console.log(startIndex)
   console.log(endIndex)
 
-  // delete
-  let count = 1
-
+  // hide list items
   for (let i = 0; i < list.length; i++) {
     list[i].style.display = "none"
-    console.log("for loop (hide list item) : " + count++)
+    console.log("hide all")
     console.log(list[i])
 
+    // show list items within the range
     if (i >= startIndex && i < endIndex) {
       list[i].style.display = ""
-      console.log("if (SHOW) : " + count++)
+      console.log("... but show this one:")
       console.log(list[i])
+      //ul.appendChild(list)
     }
   }
+  return list
 }
+console.log("line before showPage is called ...")
 showPage(studentList, 1)
+//console.log("call showPage:")
+//console.log(showPage(studentList, 1))
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
+
+// PAGINATION
 
 function appendPageLinks(list) {
   const pageTotal = list.length / numberPerPage
   let pageCounter = "1"
   const pageDiv = document.getElementsByClassName("page")[0]
 
-  console.log(list)
-  console.log(pageTotal)
+  // console.log("kazooz!")
+  // console.log(list)
+  // console.log(pageTotal)
 
   // create elements
   const pDiv = document.createElement("div")
@@ -90,8 +99,10 @@ function appendPageLinks(list) {
   for (i = 1; i <= pageTotal; i++) {
     const li = document.createElement("li")
     const a = document.createElement("a")
+    //let func = showPage(studentList, [i])
+    //console.log(func)
 
-    a.href = "#"
+    a.href = "#" // link must be to call this function??? showPage(studentList, [i])
     a.textContent = pageCounter++
     a.className = ""
     ul.appendChild(li)
@@ -104,10 +115,10 @@ function appendPageLinks(list) {
       } else {
         a.className = "active"
       }
+
       console.log("clicked")
-      // call function - what should page argement be?
+      // call function - what should page arguement be?
       console.log(pageCounter)
-      showPage(studentList, a.textContent)
     })
   }
 
@@ -117,7 +128,8 @@ function appendPageLinks(list) {
   // ul.firstElementChild.a.className = "active"
 }
 
-appendPageLinks(studentList)
+appendPageLinks(showPage(studentList, 1))
+//appendPageLinks(studentList)
 
 // let ul = document.getElementsByClassName("pageNumbers")[0]
 // ul.firstElementChild.className = "active"
