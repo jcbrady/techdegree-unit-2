@@ -16,11 +16,12 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 
-const studentList = document.querySelectorAll("li")
-//const studentList_QuerySelectorAll = document.querySelectorAll("li")
-//const studentList_QuerySelector = document.querySelector("li")
-//const studentList_TagName = document.getElementsByTagName("li")
+// ***********************
+// GLOBAL VARIABLES
+// ***********************
 
+// get students from html page as li elements
+const studentList = document.querySelectorAll("li")
 //results per page
 const numberPerPage = 10
 
@@ -39,49 +40,46 @@ const numberPerPage = 10
        "invoke" the function 
 ***/
 
-// page is the number that you’ll pass in as an argument later when function is called
-// list parameter represents the actual list of students that you’ll pass in as an argument later when function is called
+// ***********************
+// CONTENT TO SHOW ON PAGE
+// ***********************
+
+// page represents the number of pages needed for pagination
+// list represents the actual list of students
 const showPage = (list, page) => {
+  /* math formula 
+takes the page parameter in this function and the numberPerPage global variable 
+to figure out the beginning and end index of the list items to show on each page
+*/
   let startIndex = page * numberPerPage - numberPerPage
   let endIndex = page * numberPerPage
-  let ul = document.getElementsByClassName("student-list")[0]
-  //console.log("Start and end Index:")
-  //console.log(startIndex)
-  //console.log(endIndex)
 
-  // hide list items
+  // hide all the list items
   for (let i = 0; i < list.length; i++) {
     list[i].style.display = "none"
-    //console.log("hide all")
-    //console.log(list[i])
 
-    // show list items within the range
+    // show list items within the start and end range
     if (i >= startIndex && i < endIndex) {
       list[i].style.display = ""
-      //console.log("... but show this one:")
-      //console.log(list[i])
-      //ul.appendChild(list)
     }
   }
+  // return the list results to show and hide, based on the math formula
   return list
 }
-//console.log("line before showPage is called ...")
-//showPage(studentList, 1)
-//console.log("call showPage:")
-//console.log(showPage(studentList, 1))
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
 
+// ***********************
 // PAGINATION
+// ***********************
 
 function appendPageLinks(list) {
   let pageTotal = list.length / numberPerPage
   pageTotal = Math.ceil(pageTotal)
   let pageCounter = "1"
-  //let tList = ""
   const pageDiv = document.getElementsByClassName("page")[0]
 
   // create pagination element containers
@@ -117,27 +115,25 @@ function appendPageLinks(list) {
 
     //console.log(showPage(theList, [i]))
 
-    a.addEventListener("click", function (e, showPage) {
+    a.addEventListener("click", function (e) {
       e.target = a
       e.preventDefault()
-      a.href = showPage(studentList, pageCounter++)
+      //a.href = showPage(studentList, pageCounter++)
 
       if ((a.className = "active")) {
         a.className = ""
       } else {
         a.className = "active"
       }
-
-      console.log("clicked")
-      // call function - what should page arguement be?
-      console.log(pageCounter)
+      console.log("pagination clicked " + a.innerHTML)
+      showPage(list, a.innerHTML)
     })
   }
 
   console.log(pDiv)
 }
 
-// initial call of showPage is passed as an argument
+// initial call of showPage function is passed as an argument
 appendPageLinks(showPage(studentList, 1))
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
