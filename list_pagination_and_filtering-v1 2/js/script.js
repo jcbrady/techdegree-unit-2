@@ -81,10 +81,10 @@ function appendPageLinks(list) {
   let pageTotal = list.length / numberPerPage
   pageTotal = Math.ceil(pageTotal)
   let pageCounter = "1"
-  let tList = ""
+  //let tList = ""
   const pageDiv = document.getElementsByClassName("page")[0]
 
-  // create pagination elements
+  // create pagination element containers
   const pDiv = document.createElement("div")
   const ul = document.createElement("ul")
   //const li = document.createElement("li")
@@ -95,12 +95,13 @@ function appendPageLinks(list) {
   pageDiv.appendChild(pDiv)
   pDiv.appendChild(ul)
 
-  // loop through the list filter and show only the display results
-  for (i = 0; i < list.length; i++) {
-    if (list[i].style.display == "") {
-      theList = list[i]
-    }
-  }
+  // loop through the list to filter style.display results
+  // for (i = 0; i < list.length; i++) {
+  //   if (list[i].style.display == "") {
+  //     theList = list[i]
+  //   }
+  // }
+
   // loop through the pageTotal variable to create an li link for each page
   for (i = 1; i <= pageTotal; i++) {
     const li = document.createElement("li")
@@ -108,17 +109,18 @@ function appendPageLinks(list) {
     //let func = showPage(studentList, [i])
     //console.log(func)
 
-    //a.href = "#" // link must be to call this function??? showPage(studentList, [i])
+    a.href = "#" // link will call the showPage function
     a.textContent = pageCounter++
     a.className = ""
     ul.appendChild(li)
     li.appendChild(a)
 
-    a.addEventListener("click", e => {
+    //console.log(showPage(theList, [i]))
+
+    a.addEventListener("click", function (e, showPage) {
       e.target = a
-      //e.preventDefault()
-      //a.href =
-      console.log(showPage(theList, [i]))
+      e.preventDefault()
+      a.href = showPage(studentList, pageCounter++)
 
       if ((a.className = "active")) {
         a.className = ""
@@ -135,14 +137,12 @@ function appendPageLinks(list) {
   console.log(pDiv)
 }
 
+// initial call of showPage is passed as an argument
 appendPageLinks(showPage(studentList, 1))
-//appendPageLinks(studentList)
-
-// let ul = document.getElementsByClassName("pageNumbers")[0]
-// ul.firstElementChild.className = "active"
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
 
+// HTML structure
 /* <div class="pagination">
 <ul>
 <li>
