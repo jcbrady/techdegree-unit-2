@@ -95,3 +95,44 @@ const appendPageLinks = list => {
 
 // initial call of showPage function is passed as an argument
 appendPageLinks(showPage(studentList, 1))
+
+// ***********************
+// SEARCH
+// ***********************
+
+function search() {
+  //Create anc structure search elements
+  const place = document.querySelector(".page")
+  const ul = document.querySelector(".student-list")
+  //console.log(ul)
+  const divContainer = document.createElement("div")
+  divContainer.className = "student-search"
+
+  const input = document.createElement("input")
+  input.type = "text"
+  input.placeholder = "Search for students"
+  const button = document.createElement("button")
+  button.innerText = "search"
+  divContainer.appendChild(input)
+  divContainer.appendChild(button)
+  place.insertBefore(divContainer, ul)
+  console.log(divContainer)
+
+  // Append search elements
+}
+
+{
+  /* 
+      <div class="page-header cf">
+        <h2>Students</h2>
+        
+        <!-- student search HTML to add dynamically -->
+        <div class="student-search">
+          <input placeholder="Search for students...">
+          <button>Search</button>
+        </div>
+        <!-- end search -->
+
+      </div>
+*/
+}
