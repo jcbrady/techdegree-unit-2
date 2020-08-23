@@ -62,7 +62,7 @@ const appendPageLinks = list => {
   pDiv.appendChild(ul)
 
   // loop through the pageTotal variable to create an li link for each page
-  for (i = 1; i <= pageTotal; i++) {
+  for (let i = 1; i <= pageTotal; i++) {
     const li = document.createElement("li")
     let a = document.createElement("a")
 
@@ -78,7 +78,7 @@ const appendPageLinks = list => {
       showPage(list, a.innerHTML)
 
       // loop over pagination links to remove active class from all links
-      for (i = 0; i < pageTotal; i++) {
+      for (let i = 0; i < pageTotal; i++) {
         let lis = pDiv.getElementsByTagName("a")[i]
         lis.className = ""
       }
@@ -100,39 +100,39 @@ appendPageLinks(showPage(studentList, 1))
 // SEARCH
 // ***********************
 
-function search() {
-  //Create anc structure search elements
-  const place = document.querySelector(".page")
-  const ul = document.querySelector(".student-list")
-  //console.log(ul)
+function search(list) {
+  // Create and structure search elements
+  const pageHeader = document.querySelector(".page-header")
   const divContainer = document.createElement("div")
   divContainer.className = "student-search"
-
   const input = document.createElement("input")
   input.type = "text"
-  input.placeholder = "Search for students"
+  input.placeholder = "Search for students..."
   const button = document.createElement("button")
   button.innerText = "search"
+
+  // Append search to the page
   divContainer.appendChild(input)
   divContainer.appendChild(button)
-  place.insertBefore(divContainer, ul)
-  console.log(divContainer)
+  pageHeader.appendChild(divContainer)
 
-  // Append search elements
+  // Search Functionality
+
+  button.addEventListener("click", e => {
+    let searchEntry = document.querySelector("input").value
+    searchEntry = searchEntry.toLowerCase()
+    //console.log(searchEntry)
+    for (let i = 0; i < list.length; i++) {
+      //list[i]
+      let namesList = document.getElementsByTagName("h3")[i]
+      //console.log(namesList.textContent)
+      if (searchEntry !== 0 && searchEntry == namesList.textContent) {
+        // console.log(list[i])
+        namesList.parentNode.parentNode.style.backgroundColor = "pink"
+        //namesList.parentNode.parentNode.style.display = "none"
+      }
+    }
+  })
 }
 
-{
-  /* 
-      <div class="page-header cf">
-        <h2>Students</h2>
-        
-        <!-- student search HTML to add dynamically -->
-        <div class="student-search">
-          <input placeholder="Search for students...">
-          <button>Search</button>
-        </div>
-        <!-- end search -->
-
-      </div>
-*/
-}
+search(studentList)
