@@ -122,14 +122,32 @@ function search(list) {
 
   // Search functionality with button
   button.addEventListener("click", e => {
-    let putList = document.getElementsByClassName("page")[0]
-    console.log(putList)
-    putList = putList.children[1]
+    let arr = []
+
+    //let putList = document.getElementsByClassName("page")[0]
+    //console.log(`${putList} is putList`)
+    //putList = putList.children[1]
     let searchEntry = document.querySelector("input").value
     searchEntry = searchEntry.toLowerCase()
     //console.log(searchEntry)
+
+    // console.log(`list is ${list} template literal outside of loop`)
+    // console.log(list.innerHTML)
+    // console.log(list.parentNode)
+    // console.log(list.nextElementSibling)
+
     for (let i = 0; i < list.length; i++) {
       let namesList = document.getElementsByTagName("h3")[i]
+      console.log(`searchEntry is ${searchEntry}`)
+
+      // console.log(list[i].children)
+      // console.log(list[i].parentNode)
+      console.log(list[i].nextElementSibling)
+      console.log(list[i])
+      console.log(list[i].innerHTML)
+      console.log(list[i].tagName == "h3")
+      //console.log(namesList.textContent)
+
       // if results are found in namesList ...
       if (searchEntry === namesList.textContent) {
         // hide everything on the page in this loop ...
@@ -137,8 +155,16 @@ function search(list) {
           list[i].style.display = "none"
         }
         //... then show only what was searched for by removing display "none"
-        namesList.parentNode.parentNode.style.display = ""
-      }
+        //namesList.parentNode.parentNode.style.display = ""
+        let match = namesList.parentNode
+        arr.push(match)
+        console.log(arr)
+      } // end if
+
+      // 1. push search matches into the array
+      // 2. then pass array to these functions
+      // appendPagelinks(arr)
+      // showPage(arr, 1)
 
       //
       // *** HAVING TROUBLE WITH ELSE IF ...
@@ -147,14 +173,14 @@ function search(list) {
       //
 
       // else if there is a value typed in the search field and results are NOT found in namesList ...
-      else if (searchEntry.length !== 0 && searchEntry !== namesList.textContent) {
-        console.log(namesList.textContent)
-        for (let i = 0; i < list.length; i++) {
-          list[i].style.display = "none"
-        }
-        // ... append the noResults HTML message
-        putList.appendChild(noResults)
-      }
+      // else if (searchEntry.length !== 0 && searchEntry !== namesList.textContent) {
+      //   console.log(namesList.textContent)
+      //   for (let i = 0; i < list.length; i++) {
+      //     list[i].style.display = "none"
+      //   }
+      //   // ... append the noResults HTML message
+      //   putList.appendChild(noResults)
+      // }
       // end else if
       //
       //
