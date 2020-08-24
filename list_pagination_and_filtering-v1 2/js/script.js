@@ -110,74 +110,45 @@ function search(list) {
   input.placeholder = "Search for students..."
   const button = document.createElement("button")
   button.innerText = "search"
+  const ul = document.querySelector("ul")
+  const NoResults = (document.createElement("li").innerHTML = "Sorry, no students by that name.")
 
   // Append search to the page
   divContainer.appendChild(input)
   divContainer.appendChild(button)
   pageHeader.appendChild(divContainer)
 
-  // Search Functionality
-  // mystery - why does searchEntry declared as below console.log as no value, unless it's declared in the eventListener?
-  //let searchEntry = document.querySelector("input").value
-
+  // Search functionality with button
   button.addEventListener("click", e => {
     let searchEntry = document.querySelector("input").value
     searchEntry = searchEntry.toLowerCase()
     console.log(searchEntry)
     for (let i = 0; i < list.length; i++) {
-      //list[i]
       let namesList = document.getElementsByTagName("h3")[i]
-      //console.log(namesList.textContent)
       if (searchEntry !== 0 && searchEntry == namesList.textContent) {
-        // console.log(list[i])
         namesList.parentNode.parentNode.style.backgroundColor = "blue"
         //namesList.parentNode.parentNode.style.display = "none"
       }
     }
   })
 
+  // Search functionality with keyup
   input.addEventListener("keyup", e => {
-    // e.target is the input box in this case
     let searchEntry = document.querySelector("input").value
     searchEntry = searchEntry.toLowerCase()
-
-    console.log("searchEntry is ...")
-    console.log(searchEntry)
-
     for (let i = 0; i < list.length; i++) {
-      //console.log(list[i])
       let namesList = document.getElementsByTagName("h3")[i]
-
-      // use of indexOf() is interesting but not quite what I'm after:
-      //console.log("indexOf test: ")
-      //console.log(namesList.textContent.indexOf(searchEntry))
-
-      // if (searchEntry == namesList.textContent.indexOf(searchEntry)) {
-      //   namesList.parentNode.parentNode.style.display = ""
-      //   list[i].style.display = "none"
-      // }
-
       if (searchEntry !== 0 && searchEntry == namesList.textContent) {
         // hide everything on the page
         for (let i = 0; i < list.length; i++) {
           list[i].style.display = "none"
         }
-
         //show only what was searched for
         namesList.parentNode.parentNode.style.display = ""
-
-        //console.log(namesList.parentNode.parentNode)
-        //console.log(searchEntry)
-        //.style.display = "none"
-        //e.target.parentNode.parentNode.className = "active"
-        //e.target.style.backgroundColor = "blue"
-        //e.target.parentNode.parentNode.style.display = "none"
-        //console.log(e.target.value) // iboya vat
       }
     }
-    searchEntry = ""
-    //console.log("keyup was triggered")
   })
 }
 
+// call search and pass in studentList
 search(studentList)
