@@ -123,63 +123,43 @@ function search(list) {
   // Search functionality with button
   button.addEventListener("click", e => {
     let putList = document.getElementsByClassName("page")[0]
-    // let pagiNation = document.getElementsByClassName("pagination")[0]
-    //console.log(pagiNation)
     console.log(putList)
     putList = putList.children[1]
-    console.log(putList)
-
     let searchEntry = document.querySelector("input").value
     searchEntry = searchEntry.toLowerCase()
-    console.log(searchEntry)
+    //console.log(searchEntry)
     for (let i = 0; i < list.length; i++) {
       let namesList = document.getElementsByTagName("h3")[i]
-      if (searchEntry == namesList.textContent) {
-        //namesList.parentNode.parentNode.style.backgroundColor = "blue"
-        //namesList.parentNode.parentNode.style.display = "none"
-        // hide everything on the page
+      // if results are found in namesList ...
+      if (searchEntry === namesList.textContent) {
+        // hide everything on the page in this loop ...
         for (let i = 0; i < list.length; i++) {
           list[i].style.display = "none"
         }
-        //show only what was searched for
+        //... then show only what was searched for by removing display "none"
         namesList.parentNode.parentNode.style.display = ""
-        //
-      } else if (searchEntry.length !== 0 && searchEntry !== namesList.textContent) {
+      }
+
+      //
+      // *** HAVING TROUBLE WITH ELSE IF ...
+      // This shows the message, but over writes the search results from the if statement above.
+      // Since the 'if' block runs, why would the 'else if' run?
+      //
+
+      // else if there is a value typed in the search field and results are NOT found in namesList ...
+      else if (searchEntry.length !== 0 && searchEntry !== namesList.textContent) {
+        console.log(namesList.textContent)
         for (let i = 0; i < list.length; i++) {
           list[i].style.display = "none"
         }
-        console.log(noResults)
+        // ... append the noResults HTML message
         putList.appendChild(noResults)
-        //putList.insertBefore(noResults, pagiNation)
-
-        //namesList.parentNode.parentNode.style.display = ""
-        console.log("Nope, no students by that name.")
-        //ul.appendChild(noResults)
-        //console.log(noResults)
       }
+      // end else if
+      //
+      //
     }
   })
-
-  /*
-  // Search functionality with keyup
-  input.addEventListener("keyup", e => {
-    let searchEntry = document.querySelector("input").value
-    searchEntry = searchEntry.toLowerCase()
-    for (let i = 0; i < list.length; i++) {
-      let namesList = document.getElementsByTagName("h3")[i]
-      if (searchEntry !== 0 && searchEntry == namesList.textContent) {
-        // hide everything on the page
-        for (let i = 0; i < list.length; i++) {
-          list[i].style.display = "none"
-        }
-        //show only what was searched for
-        namesList.parentNode.parentNode.style.display = ""
-      } else if (searchEntry !== namesList.textContent) {
-        console.log("no results")
-      }
-    }
-  })
-  */
 }
 
 // call search and pass in studentList
