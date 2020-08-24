@@ -143,7 +143,7 @@ function search(list) {
       //
       // *** HAVING TROUBLE WITH ELSE IF ...
       // This shows the message, but over writes the search results from the if statement above.
-      // Since the 'if' block runs, why would the 'else if' run?
+      // Question: Since the 'if' block runs, why would the 'else if' run?
       //
 
       // else if there is a value typed in the search field and results are NOT found in namesList ...
