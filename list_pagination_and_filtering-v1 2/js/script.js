@@ -110,8 +110,10 @@ function search(list) {
   input.placeholder = "Search for students..."
   const button = document.createElement("button")
   button.innerText = "search"
+
   const ul = document.querySelector("ul")
-  const NoResults = (document.createElement("li").innerHTML = "Sorry, no students by that name.")
+  const noResults = document.createElement("li")
+  noResults.innerHTML = "Sorry, no students by that name."
 
   // Append search to the page
   divContainer.appendChild(input)
@@ -120,18 +122,45 @@ function search(list) {
 
   // Search functionality with button
   button.addEventListener("click", e => {
+    let putList = document.getElementsByClassName("page")[0]
+    // let pagiNation = document.getElementsByClassName("pagination")[0]
+    //console.log(pagiNation)
+    console.log(putList)
+    putList = putList.children[1]
+    console.log(putList)
+
     let searchEntry = document.querySelector("input").value
     searchEntry = searchEntry.toLowerCase()
     console.log(searchEntry)
     for (let i = 0; i < list.length; i++) {
       let namesList = document.getElementsByTagName("h3")[i]
-      if (searchEntry !== 0 && searchEntry == namesList.textContent) {
-        namesList.parentNode.parentNode.style.backgroundColor = "blue"
+      if (searchEntry == namesList.textContent) {
+        //namesList.parentNode.parentNode.style.backgroundColor = "blue"
         //namesList.parentNode.parentNode.style.display = "none"
+        // hide everything on the page
+        for (let i = 0; i < list.length; i++) {
+          list[i].style.display = "none"
+        }
+        //show only what was searched for
+        namesList.parentNode.parentNode.style.display = ""
+        //
+      } else if (searchEntry.length !== 0 && searchEntry !== namesList.textContent) {
+        for (let i = 0; i < list.length; i++) {
+          list[i].style.display = "none"
+        }
+        console.log(noResults)
+        putList.appendChild(noResults)
+        //putList.insertBefore(noResults, pagiNation)
+
+        //namesList.parentNode.parentNode.style.display = ""
+        console.log("Nope, no students by that name.")
+        //ul.appendChild(noResults)
+        //console.log(noResults)
       }
     }
   })
 
+  /*
   // Search functionality with keyup
   input.addEventListener("keyup", e => {
     let searchEntry = document.querySelector("input").value
@@ -145,9 +174,12 @@ function search(list) {
         }
         //show only what was searched for
         namesList.parentNode.parentNode.style.display = ""
+      } else if (searchEntry !== namesList.textContent) {
+        console.log("no results")
       }
     }
   })
+  */
 }
 
 // call search and pass in studentList
