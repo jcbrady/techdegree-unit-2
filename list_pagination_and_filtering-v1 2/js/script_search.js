@@ -91,7 +91,7 @@ const appendPageLinks = list => {
 
   // activate first pagination link
   let lisFirst = pDiv.getElementsByTagName("a")[0]
-  lisFirst.className = "active"
+  //lisFirst.className = "active"
 }
 
 // initial call of showPage function is passed as an argument
@@ -124,7 +124,6 @@ function search(list) {
   // Search functionality with button
   button.addEventListener("click", e => {
     let arr = []
-    //console.log(arr)
     let searchEntry = document.querySelector("input").value
     searchEntry = searchEntry.toLowerCase()
 
@@ -134,34 +133,32 @@ function search(list) {
 
       // if searchEnrty results are found in name ...
       if (searchEntry === name) {
-        console.log(`BOOYA! Your match is ${name}`)
+        console.log(`Your match is ${name}`)
         // hide everything on the page in this loop ...
         for (let i = 0; i < list.length; i++) {
           list[i].style.display = "none"
         }
         //... but push the match that was found into the arr[] array
-        // with display set to ""
 
-        console.log("============")
-
-        let match = (list[i].style.display = "")
-        arr.push(match + "Yo!")
-        // Yo! get's pushed to the array but not the list item?
+        arr.push(list[i])
         // Also, I noticed that list[i] becomes an [object HTMLLIelement] unless style.display is included. Why is that?
-        console.log("arr-----")
+        console.log("----arr[]-----")
         console.log(arr[0])
+
         //ul.appendChild(arr[0])
         //showPage(arr[0], 1)
+
+        // call appendPageLinks function, pass showPage function as the parameter and the arr[] array as it's first parameter
         //appendPageLinks(showPage(arr[0], 1))
+        //showPage(arr[0])
 
-        // this appendChild method works, but not really
-        ul.appendChild(list[i])
-        console.log(list[i])
+        // appendPageLinks(showPage(arr), 1)
 
-        //ul.innerHTML = "Yes, your match is ... " + arr[0]
-        break
+        ul.innerHTML = `Yes, your match is ... "${name}" and they are a registered student.`
+
+        break // break exits the if statement as soon as it finds a match
       } else {
-        ul.innerHTML = "Sorry, your search didn't have any matches ... "
+        ul.innerHTML = `Sorry, your search for "${searchEntry}" didn't have any matches, make sure to enter a first and last name.`
       }
 
       // *** NOTE: ShowPage() and appendPageLinks() functions are supposed to be included somehow)
